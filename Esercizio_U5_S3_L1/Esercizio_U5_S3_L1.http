@@ -1,0 +1,6 @@
+@Esercizio_U5_S3_L1_HostAddress = http://localhost:5089
+
+GET {{Esercizio_U5_S3_L1_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

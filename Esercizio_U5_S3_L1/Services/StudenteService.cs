@@ -76,5 +76,15 @@ namespace Esercizio_U5_S3_L1.Services {
                 return false;
             }
         }
+
+        public async Task<bool> UpdateStudenteAsync(string email, Studente studente) {
+            Studente studenteTrovato = await GetStudenteByEmailAsync(email);
+
+            studenteTrovato.Nome = studente.Nome;
+            studenteTrovato.Cognome = studente.Cognome;
+            studenteTrovato.Email = studente.Email;
+
+            return await SaveAsync();
+        }
     }
 }

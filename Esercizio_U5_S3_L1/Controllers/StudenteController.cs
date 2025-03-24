@@ -83,13 +83,13 @@ namespace Esercizio_U5_S3_L1.Controllers {
             });
         }
 
-        [HttpPut]
-        public async Task<IActionResult> UpdateStudente([FromBody] Studente studente) {
-            var result = await _studenteService.AddStudenteAsync(studente);
+        [HttpPut("UpdateByEmail")]
+        public async Task<IActionResult> UpdateStudente([FromQuery] string email, [FromBody] Studente studente) {
+            var result = await _studenteService.UpdateStudenteAsync(email, studente);
 
             if (!result) {
                 return BadRequest(new {
-                    message = "Errore nell'update dello studente"
+                    message = "Errore nella modifica"
                 });
             }
 

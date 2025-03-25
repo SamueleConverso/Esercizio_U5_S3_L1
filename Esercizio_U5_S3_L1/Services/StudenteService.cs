@@ -1,4 +1,5 @@
 ﻿using Esercizio_U5_S3_L1.Data;
+using Esercizio_U5_S3_L1.DTOs.Student;
 using Esercizio_U5_S3_L1.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -29,7 +30,7 @@ namespace Esercizio_U5_S3_L1.Services {
             var studenti = new List<Studente>();
 
             try {
-                studenti = await _context.Studenti.ToListAsync();
+                studenti = await _context.Studenti.Include(s => s.StudenteProfile).ToListAsync();
                 return studenti;
             } catch (Exception ex) {
                 studenti = new List<Studente>();
@@ -77,12 +78,12 @@ namespace Esercizio_U5_S3_L1.Services {
             }
         }
 
-        public async Task<bool> UpdateStudenteAsync(string email, Studente studente) {
+        public async Task<bool> UpdateStudenteAsync(string email, UpdateStudenteRequestDto updateStudenteRequestDto) {
             Studente studenteTrovato = await GetStudenteByEmailAsync(email);
 
-            studenteTrovato.Nome = studente.Nome;
-            studenteTrovato.Cognome = studente.Cognome;
-            studenteTrovato.Email = studente.Email;
+            studenteTrovato.Nome = updateStudenteRequestDto.Nome;
+            studenteTrovato.Cognome = updateStudenteRequestDto.Cognome;
+            studenteTrovato.Email = updateStudenteRequestDto.Email;
 
             return await SaveAsync();
         }

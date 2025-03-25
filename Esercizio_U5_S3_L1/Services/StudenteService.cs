@@ -44,7 +44,7 @@ namespace Esercizio_U5_S3_L1.Services {
             Studente studente = null;
 
             try {
-                studente = await _context.Studenti.FirstOrDefaultAsync(s => s.Email == email);
+                studente = await _context.Studenti.Include(s => s.StudenteProfile).FirstOrDefaultAsync(s => s.Email == email);
                 return studente;
             } catch (Exception ex) {
                 studente = null;

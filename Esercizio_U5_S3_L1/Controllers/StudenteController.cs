@@ -28,9 +28,21 @@ namespace Esercizio_U5_S3_L1.Controllers {
                 return NoContent();
             }
 
+            var studentiResponse = studentiList.Select(s => new StudenteDto() {
+                Nome = s.Nome,
+                Cognome = s.Cognome,
+                Email = s.Email,
+                StudenteProfileDto = s.StudenteProfile != null ? new StudenteProfileDto() {
+                    FirstName = s.StudenteProfile.FirstName,
+                    LastName = s.StudenteProfile.LastName,
+                    FiscalCode = s.StudenteProfile.FiscalCode,
+                    BirthDate = s.StudenteProfile.BirthDate
+                } : null
+            });
+
             return Ok(new {
-                message = $"Numero studenti trovati: {studentiList.Count}",
-                studenti = studentiList
+                message = $"Numero studenti trovati: {studentiResponse.Count()}",
+                studenti = studentiResponse
             });
         }
 
@@ -43,6 +55,17 @@ namespace Esercizio_U5_S3_L1.Controllers {
                     message = "Errore nel recupero dello studente"
                 });
             }
+            var studenteDto = new StudenteDto() {
+                Nome = studente.Nome,
+                Cognome = studente.Cognome,
+                Email = studente.Email,
+                StudenteProfileDto = studente.StudenteProfile != null ? new StudenteProfileDto() {
+                    FirstName = studente.StudenteProfile.FirstName,
+                    LastName = studente.StudenteProfile.LastName,
+                    FiscalCode = studente.StudenteProfile.FiscalCode,
+                    BirthDate = studente.StudenteProfile.BirthDate
+                } : null
+            };
 
             //if (!studente.Any()) {
             //    return NoContent();
@@ -50,7 +73,7 @@ namespace Esercizio_U5_S3_L1.Controllers {
 
             return Ok(new {
                 message = "Studente trovato",
-                studenteFound = studente
+                studenteFound = studenteDto
             });
         }
 

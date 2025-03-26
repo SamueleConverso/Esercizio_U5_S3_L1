@@ -1,6 +1,7 @@
 ﻿using Esercizio_U5_S3_L1.DTOs.Student;
 using Esercizio_U5_S3_L1.Models;
 using Esercizio_U5_S3_L1.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,6 +15,7 @@ namespace Esercizio_U5_S3_L1.Controllers {
             _studenteService = studenteService;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> GetAllStudenti() {
             var studentiList = await _studenteService.GetAllStudentiAsync();
@@ -46,6 +48,7 @@ namespace Esercizio_U5_S3_L1.Controllers {
             });
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("{email}")]
         public async Task<IActionResult> GetStudenteByEmail(string email) {
             Studente studente = await _studenteService.GetStudenteByEmailAsync(email);

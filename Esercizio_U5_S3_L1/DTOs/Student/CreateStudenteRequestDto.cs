@@ -17,5 +17,15 @@ namespace Esercizio_U5_S3_L1.DTOs.Student {
         public required string Email {
             get; set;
         }
+
+        [Required]
+        public required string FiscalCode {
+            get; set;
+        }
+
+        [Required]
+        public required DateOnly BirthDate {
+            get; set;
+        }
     }
 }

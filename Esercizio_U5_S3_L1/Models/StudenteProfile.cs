@@ -29,7 +29,7 @@ namespace Esercizio_U5_S3_L1.Models {
         }
 
         [Required]
-        public required Guid StudenteId {
+        public Guid StudenteId {
             get; set;
         }
 

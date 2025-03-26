@@ -82,7 +82,13 @@ namespace Esercizio_U5_S3_L1.Controllers {
             var newStudente = new Studente {
                 Nome = createStudenteRequestDto.Nome,
                 Cognome = createStudenteRequestDto.Cognome,
-                Email = createStudenteRequestDto.Email
+                Email = createStudenteRequestDto.Email,
+                StudenteProfile = new StudenteProfile() {
+                    FirstName = createStudenteRequestDto.Nome,
+                    LastName = createStudenteRequestDto.Cognome,
+                    FiscalCode = createStudenteRequestDto.FiscalCode,
+                    BirthDate = createStudenteRequestDto.BirthDate
+                }
             };
 
             var result = await _studenteService.AddStudenteAsync(newStudente);
